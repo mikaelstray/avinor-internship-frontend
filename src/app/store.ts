@@ -2,10 +2,12 @@ import {type Action, configureStore, type ThunkAction} from "@reduxjs/toolkit";
 import {baseApi} from "./api.ts";
 
 export const store = configureStore({
-    reducer: baseApi.reducer,
+    reducer: {
+        [baseApi.reducerPath]: baseApi.reducer,
+    },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(baseApi.middleware),
-})
+});
 
 // Infer the type of `store`
 export type AppStore = typeof store
