@@ -1,6 +1,6 @@
 import {baseApi} from "../../app/api.ts";
 
-export const areaApi = baseApi.injectEndpoints({
+export const zoneApi = baseApi.injectEndpoints({
     endpoints: builder => ({
 
     })

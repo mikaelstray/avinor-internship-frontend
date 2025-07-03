@@ -1,7 +1,7 @@
-import type {AreaResponse} from "../area/types.ts";
+import type {ZoneLiteResponse} from "../zone/types.ts";
 
-export interface LocationOccupancyUpdate {
-    id: string;
+export interface UpdateOccupancyRequest {
+    id: number;
     newPax: number;
 }
 
@@ -10,5 +10,16 @@ export interface LocationResponse {
     name: string
     capacity: number
     type: string //TODO: typedto/enum
-    area: AreaResponse
+    zone: ZoneLiteResponse
+}
+
+export interface LocationLiteResponse {
+    id: number
+    name: string
+}
+
+export interface LocationOccupancyStatus {
+    id: number
+    pax: number
+    updatedAt: string
 }
