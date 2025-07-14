@@ -9,7 +9,7 @@ import {baseApi} from "../../app/api.ts";
 import {Client} from "@stomp/stompjs";
 import SockJS from 'sockjs-client';
 
-const locationAdapter = createEntityAdapter<LocationResponse>()
+const locationAdapter = createEntityAdapter<LocationResponse>() //TODO
 
 export const locationApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -59,7 +59,6 @@ export const locationApi = baseApi.injectEndpoints({
                 } catch { /* empty */ }
 
                 await cacheEntryRemoved;
-
                 await client.deactivate();
             },
         }),
