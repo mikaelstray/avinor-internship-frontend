@@ -1,6 +1,6 @@
 import {baseApi} from "../../app/api.ts";
 import type {AirportLiteResponse} from "./types.ts";
-import type {TerminalLiteResponse} from "../terminal/types.ts";
+import type { TerminalResponse} from "../terminal/types.ts";
 import type {LocationLiteResponse} from "../location/types.ts";
 
 export const airportApi = baseApi.injectEndpoints({
@@ -8,11 +8,11 @@ export const airportApi = baseApi.injectEndpoints({
         getLiteAirports: builder.query<AirportLiteResponse[], void>({
             query: () => `/airports`
         }),
-        getTerminalsByAirportIata: builder.query<TerminalLiteResponse[], string>({
+        getTerminalsByAirportIata: builder.query<TerminalResponse[], string>({
             query: (airportIata) => `airports/${airportIata}/terminals`,
             //TODO: transformResponse
         }),
-        getLocationsByAirportIata: builder.query<LocationLiteResponse[], string>({
+        getLiteLocationsByAirportIata: builder.query<LocationLiteResponse[], string>({
             query: (airportIata) => `airports/${airportIata}/locations`,
             //TODO: transformResponse
         }),
@@ -22,5 +22,5 @@ export const airportApi = baseApi.injectEndpoints({
 export const {
     useGetLiteAirportsQuery,
     useGetTerminalsByAirportIataQuery,
-    useGetLocationsByAirportIataQuery
+    useGetLiteLocationsByAirportIataQuery
 } = airportApi;
