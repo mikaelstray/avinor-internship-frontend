@@ -1,6 +1,7 @@
-import {useGetLocationsByAirportIataQuery} from "../../airport/airportApi.ts";
+import {useGetLiteLocationsByAirportIataQuery} from "../../airport/airportApi.ts";
 import {useMemo, useState} from "react";
 import {useNavigate} from "@tanstack/react-router";
+import {Select} from "@mantine/core";
 
 interface LocationSearchProps {
     airportIata: string;
@@ -8,50 +9,39 @@ interface LocationSearchProps {
 
 export const LocationSearch = ({ airportIata }: LocationSearchProps) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const { data: airportLocations, isLoading } = useGetLocationsByAirportIataQuery(airportIata);
+    const { data: airportLocations, isLoading } = useGetLiteLocationsByAirportIataQuery(airportIata);
     const navigate = useNavigate()
-
-    const filteredLocations = useMemo(() => {
-        const locations: Location[] = airportLocations ?? [];
-
-        if (!searchTerm) {
-            return locations;
-        }
-
-        return locations.filter(location =>
-            location.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    }, [airportLocations, searchTerm]);
 
     const handleClick = (id: number) => {
         navigate({ to: `/airport/location/${id}` })
     };
 
+    const selectData = useMemo(() =>
+            (airportLocations ?? []).map(location => ({
+                value: String(location.id),
+                label: location.name,
+            })),
+        [airportLocations]);
+
+
     return (
         <div>
-            <h2>Locations</h2>
-
-            <input
-                type="search"
-                placeholder="Søk i locations..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                style={{ marginBottom: '1rem' }} //todo limit
+            <h2>Søk etter lokasjon</h2>
+            <Select
+                label="Gate"
+                placeholder="Skriv for å søke..."
+                searchable
+                searchValue={searchTerm}
+                onSearchChange={setSearchTerm}
+                nothingFoundMessage="Ingen treff"
+                data={selectData}
+                withScrollArea={false}
+                styles={{ dropdown: { maxHeight: 180, overflowY: 'auto' } }}
+                mt="md"
+                onChange={handleClick}
+                disabled={isLoading}
+                w={280}
             />
-
-            {isLoading && <p>Laster...</p>}
-
-            <ul>
-                {filteredLocations?.map((location) => (
-                    <li
-                        key={location.id}
-                        onClick={() => handleClick(location.id)}
-                        style={{ cursor: 'pointer', padding: '4px 0' }}
-                    >
-                        {location.name}
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 };
