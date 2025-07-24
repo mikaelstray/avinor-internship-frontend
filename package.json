@@ -19,6 +19,7 @@
     "@stomp/stompjs": "^7.1.1",
     "@tanstack/react-router": "^1.124.0",
     "@tanstack/react-router-devtools": "^1.124.0",
+    "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-redux": "^9.2.0",
