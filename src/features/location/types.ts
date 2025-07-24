@@ -1,4 +1,5 @@
 import type {ZoneLiteResponse} from "../zone/types.ts";
+import type {TerminalLiteResponse} from "../terminal/types.ts";
 
 export interface UpdateOccupancyRequest {
     id: number;
@@ -10,12 +11,15 @@ export interface LocationResponse {
     name: string
     capacity: number
     type: string //TODO: typedto/enum
-    zone: ZoneLiteResponse
+    terminal: TerminalLiteResponse
+    nearbyLocations: LocationLiteResponse[]
 }
 
 export interface LocationLiteResponse {
     id: number
     name: string
+    capacity: number
+    type: string
 }
 
 export interface LocationOccupancyStatus {

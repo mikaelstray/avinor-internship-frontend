@@ -13,7 +13,7 @@ const locationAdapter = createEntityAdapter<LocationResponse>() //TODO
 
 export const locationApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getLiteLocationById: builder.query<LocationLiteResponse, number>({
+        getLocationById: builder.query<LocationResponse, number>({
             query: (locationId) => `/locations/${locationId}`
         }),
         updatePax: builder.mutation<LocationOccupancyStatus, UpdateOccupancyRequest>({
@@ -67,7 +67,7 @@ export const locationApi = baseApi.injectEndpoints({
 })
 
 export const {
-    useGetLiteLocationByIdQuery,
+    useGetLocationByIdQuery,
     useUpdatePaxMutation,
     useGetOccupancyStatusQuery
 } = locationApi;
