@@ -1,0 +1,43 @@
+
+.header {
+  height: 88.71px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--ds-size-7) var(--ds-size-10);
+  gap: var(--ds-size-3);
+  background: var(--ds-color-base-default);
+  color: white;
+}
+
+.header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-svg {
+  height: 32px;
+}
+
+.weather-icon svg {
+  height: 24px;
+  width: 24px;
+}
+
+.temperature,
+.clock {
+  color: var(--ds-color-base-contrast-default);
+  font-family: var(--avinor-font-family-heading, Avinor);
+  font-size: var(--ds-font-size-6);
+  font-weight: 700;
+  line-height: 130%;
+}
+
+
+.divider {
+  width: 1px;
+  height: 20px;
+  background-color: white;
+  opacity: 0.5;
+}
