@@ -46,7 +46,7 @@ export const locationApi = baseApi.injectEndpoints({
                         client.subscribe('/topic/pax-updates', (message) => {
                             const data: LocationOccupancyStatus = JSON.parse(message.body);
 
-                            if (data && data.id === locationId) {
+                            if (data && data.locationId === locationId) {
                                 updateCachedData((draft) => {
                                     draft.pax = data.pax;
                                     draft.updatedAt = data.updatedAt;

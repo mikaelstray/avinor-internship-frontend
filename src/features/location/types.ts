@@ -26,4 +26,5 @@ export interface LocationOccupancyStatus {
     id: number
     pax: number
     updatedAt: string
+    locationId: number
 }
