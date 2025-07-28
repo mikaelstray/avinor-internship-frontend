@@ -1,0 +1,14 @@
+.back-button svg {
+  width: var(--ds-size-6);
+  height: var(--ds-size-6);
+}
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-size-2);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ds-color-text-default);
+}

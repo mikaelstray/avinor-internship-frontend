@@ -1,0 +1,27 @@
+.sub-header {
+  background: var(--ds-color-surface-tinted);
+  border-radius: var(--ds-border-radius-default);
+  display: flex;
+  height: var(--ds-size-12);
+  padding: var(--ds-size-0) var(--ds-size-4);
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--ds-size-2);
+}
+
+.language-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ds-color-text-default);
+}
+
+.flag-icon svg {
+  display: block;
+  width: 20px;
+  height: 21px;
+}
