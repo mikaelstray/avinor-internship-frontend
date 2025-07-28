@@ -1,6 +1,6 @@
 import React from "react";
-import { BackButton } from "../components/BackButton"; // juster path hvis nødvendig
-import "./subHeader.css";
+import { BackButton } from "../BackButton/backButton";
+import "../SubHeader/subHeader.css";
 
 type Props = {
   showBackButton: boolean;
