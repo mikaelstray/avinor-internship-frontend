@@ -7,7 +7,6 @@
   padding: var(--ds-size-7) var(--ds-size-10);
   gap: var(--ds-size-3);
   background: var(--ds-color-base-default);
-  color: white;
 }
 
 .header-info {
@@ -33,7 +32,6 @@
   font-weight: 700;
   line-height: 130%;
 }
-
 
 .divider {
   width: 1px;
