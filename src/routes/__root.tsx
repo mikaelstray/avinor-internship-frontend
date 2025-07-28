@@ -1,5 +1,6 @@
 import { createRootRoute, Outlet, useLocation, useNavigate } from "@tanstack/react-router";
 import { Header } from "../components//Header/header";
+import { router } from '../app/router';
 
 export const Route = createRootRoute({
   component: () => {
