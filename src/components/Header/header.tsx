@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SubHeader } from "./subHeader";
-import "./header.css";
+import { SubHeader } from "../SubHeader/SubHeader";
+import "../Header/header.css";
 
 type HeaderProps = {
   showBackButton: boolean;

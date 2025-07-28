@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "@tanstack/react-router";
-import "../style/backButton.css";
+import "../BackButton/backButton.css";
 
 export const BackButton: React.FC = () => {
   const navigate = useNavigate();
