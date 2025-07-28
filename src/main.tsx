@@ -8,6 +8,8 @@ import {MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@digdir/designsystemet-css/index.css';
 import './avinor.css'
+import './style/fonts.css';
+
 
 const router = createRouter({ routeTree })
 
