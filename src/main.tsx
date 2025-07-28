@@ -9,10 +9,7 @@ import '@mantine/core/styles.css';
 import '@digdir/designsystemet-css/index.css';
 import './style/avinor.css'
 import './style/fonts.css';
-
-
-const router = createRouter({ routeTree })
-
+import { router } from './app/router'
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
