@@ -1,6 +1,6 @@
 import { useGetLocationByIdQuery, useGetOccupancyStatusQuery} from "../locationApi.ts";
 import {useNavigate, useParams, useRouter} from "@tanstack/react-router";
-import {OccupancyShower} from "./OccupancyShower.tsx";
+import { GateCard } from "../components/GateCard/nearbyGateCard.tsx";
 
 export const GateOccupancyCard = () => {
     const { locationId } = useParams({ strict: false })
@@ -18,11 +18,15 @@ export const GateOccupancyCard = () => {
 
     //TODO: tanstack loader? and error handling
 
+    let availabilityText = "Mye ledig";
+    if (percent > 70) availabilityText = "Lite ledig";
+    else if (percent > 40) availabilityText = "Noe ledig";
+
     return (
-        <>
-            <p>{location?.name}</p>
-            <p>{livePax?.pax ?? 'No live pax'} av kapasitet: {location?.capacity}</p>
-            <OccupancyShower percent={percent} />
-        </>
-    )
-}
+        <GateCard
+        gateName={location.name}
+        availability={availabilityText}
+        availabilityLevel={percent}
+        />
+    );
+};
