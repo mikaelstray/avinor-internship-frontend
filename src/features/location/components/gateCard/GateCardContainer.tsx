@@ -1,6 +1,6 @@
 import { useGetLocationByIdQuery, useGetOccupancyStatusQuery} from "../locationApi.ts";
 import {useParams} from "@tanstack/react-router";
-import {OccupancyShower} from "./OccupancyShower.tsx";
+import { GateCard } from "./neabyGateCard";
 import {Paper, Skeleton, Stack, Text} from "@mantine/core";
 
 export const GateOccupancyCard = () => {
@@ -40,7 +40,7 @@ export const GateOccupancyCard = () => {
                         return (
                             <GateCard
                             gateName={location.name}
-                            availabilityLevel={percent}
+                            availabilityLevel={(100 * (livePax.pax ?? 0)) / (location!.capacity || 1)}
                             />
                 ) : (
                     <Text c="dimmed">Ingen live status tilgjengelig.</Text>

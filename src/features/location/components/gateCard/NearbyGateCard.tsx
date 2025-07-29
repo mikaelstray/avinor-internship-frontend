@@ -4,17 +4,16 @@ import { GateCardProps } from './GateCard.types';
 
 interface GateCardProps {
   gateName: string;
-  availability: string;
   availabilityLevel: number; // 0 - 100
 }
 
 export const GateCard: React.FC<GateCardProps> = ({
   gateName,
-  availability,
   availabilityLevel,
 }) => {
   const clipId = `progress-clip-${gateName.replace(/\s+/g, "-")}`;
   const fillColor = getFillColor(availabilityLevel);
+  const availability = getAvailabilityText(availabilityLevel);
 
   return (
     <div className="gate-card">
@@ -22,10 +21,10 @@ export const GateCard: React.FC<GateCardProps> = ({
       <p className="availability-text">{availability}</p>
 
       <div className="progress-bar">
-        <svg width="136" height="33" viewBox="0 0 136 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="144" height="33" viewBox="0 0 144 33" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <clipPath id={clipId}>
-              <rect x="0" y="0" width={(availabilityLevel / 100) * 136} height="33"/>
+              <rect x="0" y="0" width={(availabilityLevel / 100) * 144} height="33"/>
             </clipPath>
           </defs>
 
@@ -62,4 +61,8 @@ function getBackgroundColor(percent: number): string {
   if (percent > 40) return "#FAE6C6";
   return "#DAEDDD";
 }
-
+function getAvailabilityText(percent: number): string {
+  if (percent > 70) return "Lite ledig";
+  if (percent > 40) return "Noe ledig";
+  return "Mye ledig";
+}
