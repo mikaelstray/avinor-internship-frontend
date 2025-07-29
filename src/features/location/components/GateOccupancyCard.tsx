@@ -1,28 +1,54 @@
 import { useGetLocationByIdQuery, useGetOccupancyStatusQuery} from "../locationApi.ts";
-import {useNavigate, useParams, useRouter} from "@tanstack/react-router";
+import {useParams} from "@tanstack/react-router";
 import {OccupancyShower} from "./OccupancyShower.tsx";
+import {Paper, Skeleton, Stack, Text} from "@mantine/core";
 
 export const GateOccupancyCard = () => {
-    const { locationId } = useParams({ strict: false })
-    const locationIdNumber = Number(locationId)
+    const { locationId } = useParams({ strict: false });
+    const locationIdNumber = Number(locationId);
 
+    const {
+        data: location,
+        isLoading: isLocationLoading,
+        error: locationError
+    } = useGetLocationByIdQuery(locationIdNumber);
 
-    const { data: location, isLoading: isLocationLoading } = useGetLocationByIdQuery(locationIdNumber)
-    const { data: livePax, isLoading: isLiveLoading } = useGetOccupancyStatusQuery(locationIdNumber)
+    const {
+        data: livePax,
+        isLoading: isLiveLoading,
+        error: livePaxError
+    } = useGetOccupancyStatusQuery(locationIdNumber);
 
-    if (!livePax || !location) {
-        return "null" //TODO improve
+    if (isLocationLoading || isLiveLoading) {
+        return (
+            <Paper withBorder p="md">
+                <Skeleton height={20} width="40%" mb="sm" />
+                <Skeleton height={15} width="60%" />
+            </Paper>
+        );
     }
 
-    const percent = 100 * livePax?.pax / location?.capacity;
-
-    //TODO: tanstack loader? and error handling
+    if (locationError || livePaxError) {
+        return <Paper withBorder p="md"><Text c="red">Kunne ikke laste data.</Text></Paper>;
+    }
 
     return (
-        <>
-            <p>{location?.name}</p>
-            <p>{livePax?.pax ?? 'No live pax'} av kapasitet: {location?.capacity}</p>
-            <OccupancyShower percent={percent} />
-        </>
-    )
+        <Paper withBorder p="md">
+            <Stack>
+                <Text fw={700} size="lg">{location!.name}</Text>
+                {livePax?.available ? (
+                    <>
+                        <Text>
+                            {livePax.pax} av {location!.capacity} plasser opptatt.
+                        </Text>
+                        <OccupancyShower
+                            percent={(100 * (livePax.pax ?? 0)) / (location!.capacity || 1)}
+                        />
+                    </>
+                ) : (
+                    <Text c="dimmed">Ingen live status tilgjengelig.</Text>
+                )}
+            </Stack>
+        </Paper>
+    );
 }
