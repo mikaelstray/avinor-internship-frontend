@@ -1,7 +1,6 @@
-import {createEntityAdapter} from "@reduxjs/toolkit";
+import {createEntityAdapter, createSelector, type EntityState} from "@reduxjs/toolkit";
 import type {
-    LocationLiteResponse,
-    LocationOccupancyStatus,
+    LocationOccupancyStatus, LocationRelationshipResponse,
     LocationResponse,
     UpdateOccupancyRequest
 } from "./types.ts";
@@ -9,7 +8,11 @@ import {baseApi} from "../../app/api.ts";
 import {Client} from "@stomp/stompjs";
 import SockJS from 'sockjs-client';
 
-const locationAdapter = createEntityAdapter<LocationResponse>() //TODO
+const nearbyLocationAdapter = createEntityAdapter<LocationRelationshipResponse>({
+    sortComparer: (a, b) => a.walkingTimeInMinutes - b.walkingTimeInMinutes,
+});
+const initialState = nearbyLocationAdapter.getInitialState()
+
 
 export const locationApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,6 +25,12 @@ export const locationApi = baseApi.injectEndpoints({
                 method: 'PATCH',
                 body: body
             })
+        }),
+        getNearbyLocationsById: builder.query<EntityState<LocationRelationshipResponse, number>, number>({
+            query: (locationId) => `/locations/${locationId}/nearby`,
+            transformResponse(res: LocationRelationshipResponse[]) {
+                return nearbyLocationAdapter.setAll(initialState, res)
+            },
         }),
         getOccupancyStatus: builder.query<LocationOccupancyStatus, number>({
             query: (locationId) => `/locations/${locationId}/occupancy`,
@@ -46,7 +55,7 @@ export const locationApi = baseApi.injectEndpoints({
                         client.subscribe('/topic/pax-updates', (message) => {
                             const data: LocationOccupancyStatus = JSON.parse(message.body);
 
-                            if (data && data.id === locationId) {
+                            if (data && data.locationId === locationId) {
                                 updateCachedData((draft) => {
                                     draft.pax = data.pax;
                                     draft.updatedAt = data.updatedAt;
@@ -62,13 +71,23 @@ export const locationApi = baseApi.injectEndpoints({
                 await client.deactivate();
             },
         }),
-        //infinitesearch
     })
 })
 
 export const {
     useGetLocationByIdQuery,
     useUpdatePaxMutation,
-    useGetOccupancyStatusQuery
+    useGetOccupancyStatusQuery,
+    useGetNearbyLocationsByIdQuery
 } = locationApi;
 
+export const selectAllNearbyRelationships = (state, id) =>
+    locationApi.endpoints.getNearbyLocationsById.select(id)(state)?.data?.entities ?? {};
+
+export const selectNearbyRelationshipById = createSelector(
+    [
+        selectAllNearbyRelationships,
+        (_state, _locationId, relationshipId) => relationshipId
+    ],
+    (allEntities, relationshipId) => allEntities[relationshipId]
+);

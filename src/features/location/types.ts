@@ -1,4 +1,3 @@
-import type {ZoneLiteResponse} from "../zone/types.ts";
 import type {TerminalLiteResponse} from "../terminal/types.ts";
 
 export interface UpdateOccupancyRequest {
@@ -26,4 +25,11 @@ export interface LocationOccupancyStatus {
     id: number
     pax: number
     updatedAt: string
+    locationId: number
+}
+
+export interface LocationRelationshipResponse {
+    id: number
+    targetLocation: LocationLiteResponse
+    walkingTimeInMinutes: number
 }
