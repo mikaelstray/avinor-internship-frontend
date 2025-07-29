@@ -1,0 +1,56 @@
+.main-gate-card {
+  display: flex;
+  width: 600px;
+  height: 300px;
+  padding: var(--ds-size-6);
+  flex-direction: column;
+  align-self: stretch;
+  flex-shrink: 0;
+  border-radius: var(--ds-border-radius-lg);
+  border: var(--ds-border-width-default) solid #B8BCC1;
+  background: var(--ds-color-surface-default, #fff);
+  box-shadow:
+      0 0 1px 0 #1C2530,
+      0 2px 4px 0 rgba(0, 0, 0, 0.12),
+      0 4px 8px 0 rgba(0, 0, 0, 0.12);
+
+}
+
+.main-gate-card-header {
+    color: var(--Components-Text-Default, #1C2530);
+    font-family: var(--avinor-font-family-heading, Avinor);
+    font-size: var(--ds-font-size-7);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 0%;
+    letter-spacing: -0.075px;
+
+
+.main-gate-subtext {
+    color: var(--Components-Text-Muted, #5C6C7F);
+    font-family: Roboto;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;}
+
+.main-gate-description {
+    color: #1F2C3D
+    font-family: var(--ds-font-family);
+    font-size: var(--ds-font-size-4);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%; /* 27px */
+    letter-spacing: 0.09px;
+}
+
+.progress-bar {
+  height: 32px;
+  width:100%
+  align-self: stretch;
+}
+
+.progress-svg {
+  width: 100%;
+  height: 100%;
+}
