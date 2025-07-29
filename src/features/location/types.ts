@@ -22,9 +22,10 @@ export interface LocationLiteResponse {
 }
 
 export interface LocationOccupancyStatus {
+    available: boolean
     id: number
-    pax: number
-    updatedAt: string
+    pax?: number
+    updatedAt?: string
     locationId: number
 }
 
@@ -33,3 +34,23 @@ export interface LocationRelationshipResponse {
     targetLocation: LocationLiteResponse
     walkingTimeInMinutes: number
 }
+
+export interface GetNearbyGatesRequest {
+    locationId: number
+    page: number
+    size: number
+    sortBy: Sort
+}
+
+export type Sort = 'walkingTime' | 'name';
+
+export interface ApiPageResponse<T> {
+    content: T[]
+    totalPages: number;
+    totalElements: number;
+    number: number;
+    last: boolean;
+    first: boolean;
+    size: number;
+}
+

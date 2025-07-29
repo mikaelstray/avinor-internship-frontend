@@ -1,5 +1,7 @@
 import {createEntityAdapter, createSelector, type EntityState} from "@reduxjs/toolkit";
 import type {
+    ApiPageResponse,
+    GetNearbyGatesRequest,
     LocationOccupancyStatus, LocationRelationshipResponse,
     LocationResponse,
     UpdateOccupancyRequest
@@ -7,12 +9,6 @@ import type {
 import {baseApi} from "../../app/api.ts";
 import {Client} from "@stomp/stompjs";
 import SockJS from 'sockjs-client';
-
-const nearbyLocationAdapter = createEntityAdapter<LocationRelationshipResponse>({
-    sortComparer: (a, b) => a.walkingTimeInMinutes - b.walkingTimeInMinutes,
-});
-const initialState = nearbyLocationAdapter.getInitialState()
-
 
 export const locationApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -26,11 +22,9 @@ export const locationApi = baseApi.injectEndpoints({
                 body: body
             })
         }),
-        getNearbyLocationsById: builder.query<EntityState<LocationRelationshipResponse, number>, number>({
-            query: (locationId) => `/locations/${locationId}/nearby`,
-            transformResponse(res: LocationRelationshipResponse[]) {
-                return nearbyLocationAdapter.setAll(initialState, res)
-            },
+        getNearbyGatesByLocationId: builder.query<ApiPageResponse<LocationRelationshipResponse>, GetNearbyGatesRequest>({
+            query: ({ locationId, page, size, sortBy }) =>
+                `locations/${locationId}/nearby/gates?page=${page}&size=${size}&sort=${sortBy},asc`
         }),
         getOccupancyStatus: builder.query<LocationOccupancyStatus, number>({
             query: (locationId) => `/locations/${locationId}/occupancy`,
@@ -78,16 +72,17 @@ export const {
     useGetLocationByIdQuery,
     useUpdatePaxMutation,
     useGetOccupancyStatusQuery,
-    useGetNearbyLocationsByIdQuery
+    useGetNearbyGatesByLocationIdQuery
 } = locationApi;
 
-export const selectAllNearbyRelationships = (state, id) =>
-    locationApi.endpoints.getNearbyLocationsById.select(id)(state)?.data?.entities ?? {};
+
+export const selectAllNearbyGatesForLocation = (state, id) =>
+    locationApi.endpoints.getNearbyGatesByLocationId.select(id)(state)?.data?.content ?? [];
 
 export const selectNearbyRelationshipById = createSelector(
     [
-        selectAllNearbyRelationships,
+        selectAllNearbyGatesForLocation,
         (_state, _locationId, relationshipId) => relationshipId
     ],
-    (allEntities, relationshipId) => allEntities[relationshipId]
+    (allGates, relationshipId) => allGates.find(relationship => relationship.id === relationshipId)
 );
