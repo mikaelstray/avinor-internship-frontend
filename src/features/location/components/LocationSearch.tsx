@@ -1,8 +1,8 @@
-import {useGetLiteLocationsByAirportIataQuery} from "../../airport/airportApi.ts";
 import {useMemo, useState} from "react";
 import {useNavigate} from "@tanstack/react-router";
-import { Select, Text } from "@mantine/core";
+import { Select } from "@mantine/core";
 import {IoIosSearch} from "react-icons/io";
+import {useGetLiteGatesByAirportIataQuery} from "../../airport/airportApi.ts";
 
 interface LocationSearchProps {
     airportIata: string;
@@ -10,7 +10,7 @@ interface LocationSearchProps {
 
 export const LocationSearch = ({ airportIata }: LocationSearchProps) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const { data: airportLocations, isLoading } = useGetLiteLocationsByAirportIataQuery(airportIata);
+    const { data: airportLocations, isLoading } = useGetLiteGatesByAirportIataQuery(airportIata);
     const navigate = useNavigate()
 
     const handleClick = (id: string | null) => {
@@ -26,6 +26,7 @@ export const LocationSearch = ({ airportIata }: LocationSearchProps) => {
             })),
         [airportLocations]);
 
+    //TODO group results by terminal with mantine
 
     return (
         <div>
