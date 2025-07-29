@@ -1,9 +1,10 @@
 import {Container, Grid, Stack} from "@mantine/core";
 import {SearchTitle} from "../../airport/components/SearchTitle.tsx";
 import {QrCodeComponent} from "../../airport/components/QrCodeComponent.tsx";
-import {NearbyFoodComponent} from "../components/NearbyFoodComponent.tsx";
+import {NearbyGatesComponent} from "../components/NearbyGatesComponent.tsx";
+import {GateOccupancyCard} from "../components/GateOccupancyCard.tsx";
 
-export const LocationsPage = () => {
+export const LocationsPage = () => { //TODO optimistic update
     return (
         <Container fluid p="xl">
             <Grid gutter="xl">
@@ -18,15 +19,15 @@ export const LocationsPage = () => {
                 <Grid.Col span={{ base: 12, lg: 8 }}>
                     <Grid gutter="xl">
                         <Grid.Col span={{ base: 12, md: 7 }}>
-                            gate
+                            <GateOccupancyCard />
                         </Grid.Col>
 
                         <Grid.Col span={{ base: 12, md: 5 }}>
-                            nearby
+                            <NearbyGatesComponent />
                         </Grid.Col>
 
                         <Grid.Col span={12}>
-                            <NearbyFoodComponent />
+                            food
                         </Grid.Col>
                     </Grid>
                 </Grid.Col>
