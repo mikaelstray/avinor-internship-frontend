@@ -1,8 +1,11 @@
 import {Heading, Paragraph} from "@digdir/designsystemet-react";
 import {QrCode} from "../../../components/QrCode.tsx";
 
-export const QrCodeComponent = () => {
-    const targetUrl = "google.com";
+interface QrCodeComponentProps {
+    url: string
+}
+
+export const QrCodeComponent = ({ url }: QrCodeComponentProps) => {
 
     return (
         <div
@@ -14,7 +17,7 @@ export const QrCodeComponent = () => {
             }}
         >
 
-            <QrCode url={targetUrl} />
+            <QrCode url={url} />
             <Paragraph
                 style={{ color: 'var(--ds-color-text-default)' }}
             >
