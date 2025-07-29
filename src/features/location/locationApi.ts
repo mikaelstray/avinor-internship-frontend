@@ -1,7 +1,7 @@
-import {createEntityAdapter, createSelector, type EntityState} from "@reduxjs/toolkit";
+import { createSelector } from "@reduxjs/toolkit";
 import type {
     ApiPageResponse,
-    GetNearbyGatesRequest,
+    GetNearbyGatesRequest, GetNearbyServingsRequest,
     LocationOccupancyStatus, LocationRelationshipResponse,
     LocationResponse,
     UpdateOccupancyRequest
@@ -25,6 +25,10 @@ export const locationApi = baseApi.injectEndpoints({
         getNearbyGatesByLocationId: builder.query<ApiPageResponse<LocationRelationshipResponse>, GetNearbyGatesRequest>({
             query: ({ locationId, page, size, sortBy }) =>
                 `locations/${locationId}/nearby/gates?page=${page}&size=${size}&sort=${sortBy},asc`
+        }),
+        getNearbyServingsByLocationId: builder.query<LocationRelationshipResponse[], GetNearbyServingsRequest>({
+            query: ({ locationId, sortBy }) =>
+                `locations/${locationId}/nearby/servings?sort=${sortBy},asc`
         }),
         getOccupancyStatus: builder.query<LocationOccupancyStatus, number>({
             query: (locationId) => `/locations/${locationId}/occupancy`,
@@ -72,7 +76,8 @@ export const {
     useGetLocationByIdQuery,
     useUpdatePaxMutation,
     useGetOccupancyStatusQuery,
-    useGetNearbyGatesByLocationIdQuery
+    useGetNearbyGatesByLocationIdQuery,
+    useGetNearbyServingsByLocationIdQuery
 } = locationApi;
 
 

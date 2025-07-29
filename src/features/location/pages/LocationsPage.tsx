@@ -3,6 +3,7 @@ import {SearchTitle} from "../../airport/components/SearchTitle.tsx";
 import {QrCodeComponent} from "../../airport/components/QrCodeComponent.tsx";
 import {NearbyGatesComponent} from "../components/NearbyGatesComponent.tsx";
 import {GateOccupancyCard} from "../components/GateOccupancyCard.tsx";
+import {NearbyFoodComponent} from "../components/NearbyFoodComponent.tsx";
 
 export const LocationsPage = () => { //TODO optimistic update
     return (
@@ -27,7 +28,7 @@ export const LocationsPage = () => { //TODO optimistic update
                         </Grid.Col>
 
                         <Grid.Col span={12}>
-                            food
+                            <NearbyFoodComponent />
                         </Grid.Col>
                     </Grid>
                 </Grid.Col>

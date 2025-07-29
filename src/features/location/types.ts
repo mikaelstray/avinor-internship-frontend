@@ -42,6 +42,11 @@ export interface GetNearbyGatesRequest {
     sortBy: Sort
 }
 
+export interface GetNearbyServingsRequest {
+    locationId: number
+    sortBy: Sort
+}
+
 export type Sort = 'walkingTime' | 'name';
 
 export interface ApiPageResponse<T> {

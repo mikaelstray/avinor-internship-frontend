@@ -15,8 +15,6 @@ export const NearbyGatesComponent = () => {
 
     const { data: gates, isLoading, error, isFetching } = useGetNearbyGatesByLocationIdQuery(getGatesReq) //TODO keepunused for lenge
 
-    console.log(gates)
-
     if (isLoading) return <p>Loading initial data...</p>;
     if (error) return <p>Oh no, there was an error</p>;
 
