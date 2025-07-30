@@ -19,14 +19,32 @@ export const LocationSearch = ({ airportIata }: LocationSearchProps) => {
         }
     };
 
-    const selectData = useMemo(() =>
-            (airportLocations ?? []).map(location => ({
+    const groupedSelectData = useMemo(() => {
+        if (!airportLocations) return [];
+
+        const grouped = airportLocations.reduce((acc, location) => {
+            const terminal = location.name.match(/^[A-Za-z]+/)?.[0] || 'Annet';
+
+            if (!acc[terminal]) {
+                acc[terminal] = [];
+            }
+
+            acc[terminal].push({
                 value: String(location.id),
                 label: location.name,
-            })),
-        [airportLocations]);
+            });
 
-    //TODO group results by terminal with mantine
+            return acc;
+        }, {} as Record<string, { value: string; label: string }[]>);
+
+        const sortedGroups = Object.keys(grouped).sort();
+
+        return sortedGroups.map(terminal => ({
+            group: `Gate ${terminal}`,
+            items: grouped[terminal],
+        }));
+
+    }, [airportLocations]);
 
     return (
         <div>
@@ -37,7 +55,7 @@ export const LocationSearch = ({ airportIata }: LocationSearchProps) => {
                 searchValue={searchTerm}
                 onSearchChange={setSearchTerm}
                 nothingFoundMessage="Ingen treff"
-                data={selectData}
+                data={groupedSelectData}
                 withScrollArea={false}
                 mt="md"
                 onChange={handleClick}
