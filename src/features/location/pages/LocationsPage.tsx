@@ -1,39 +1,46 @@
-import {Container, Grid, Stack} from "@mantine/core";
+import {Center, Container, Divider, Grid, Stack} from "@mantine/core";
 import {SearchTitle} from "../../airport/components/SearchTitle.tsx";
 import {QrCodeComponent} from "../../airport/components/QrCodeComponent.tsx";
-import {NearbyGatesComponent} from "../components/NearbyGatesComponent.tsx";
-import {NearbyFoodComponent} from "../components/NearbyFoodComponent.tsx";
+import {NearbyGatesCarousel} from "../components/NearbyGatesCarousel.tsx";
 import {GateCardContainer} from "../components/gateCard/GateCardContainer.tsx";
+import {NearbyFoodCarousel} from "../components/NearbyFoodCarousel.tsx";
 
-export const LocationsPage = () => { //TODO optimistic update
+export const LocationsPage = () => {
     return (
-        <Container fluid p="xl">
+        <Container fluid p="md">
             <Grid gutter="xl">
-
-                <Grid.Col span={{ base: 12, lg: 4 }}>
-                    <Stack>
+                {/* VENSTRE KOLONNE */}
+                <Grid.Col span="auto">
+                    <Stack justify="space-between" h="100%">
                         <SearchTitle />
-                        <QrCodeComponent url="google.com" />
+                        <QrCodeComponent url="https://www.avinor.no" />
                     </Stack>
                 </Grid.Col>
 
-                <Grid.Col span={{ base: 12, lg: 8 }}>
-                    <Grid gutter="xl">
-                        <Grid.Col span={{ base: 12, md: 7 }}>
-                            <GateCardContainer />
-                        </Grid.Col>
+                {/* HØYRE KOLONNE */}
+                <Grid.Col span={10}>
+                    <Stack gap="xl">
+                        {/* TOPPSEKSJON */}
+                        <Grid grow gutter="xl">
+                            <Grid.Col span={6}>
+                                <GateCardContainer />
+                            </Grid.Col>
+                            <Grid.Col span={6}>
+                                <NearbyGatesCarousel />
+                            </Grid.Col>
+                        </Grid>
 
-                        <Grid.Col span={{ base: 12, md: 5 }}>
-                            <NearbyGatesComponent />
-                        </Grid.Col>
+                        {/* MELLOMROM OG SKILLELINJE */}
+                        <Center>
+                            <Divider w="50%" />
+                        </Center>
 
-                        <Grid.Col span={12}>
-                            <NearbyFoodComponent />
-                        </Grid.Col>
-                    </Grid>
+                        {/* BUNNSEKSJON */}
+                        <NearbyFoodCarousel />
+                    </Stack>
+
                 </Grid.Col>
-
             </Grid>
         </Container>
     );
-}
+};
