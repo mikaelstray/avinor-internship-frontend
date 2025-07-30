@@ -1,23 +1,28 @@
-import { useGetLocationByIdQuery} from "../locationApi.ts";
+import { Card, Image, Text, Stack, AspectRatio } from '@mantine/core';
 
-
+// Props for å gjøre komponenten dynamisk
 interface FoodCardProps {
-    nearbyId: number
+    title: string;
+    description: string;
+    imageUrl: string;
 }
 
-export const FoodCard = ({ nearbyId }: FoodCardProps) => {
-    const { data: location } = useGetLocationByIdQuery(nearbyId) //TODO optimize
-    const imageUrl = `https://picsum.photos/seed/${nearbyId}/400/200`;
-    console.log(location)
-
+export const FoodCard = ({ title, description, imageUrl }: FoodCardProps) => {
     return (
-        <div style={{ border: "1px solid #ccc", margin: "8px", width: "250px" }}>
-            <img
-                src={imageUrl}
-                alt={`Bilde for ${location?.name}`}
-                style={{ width: "100%" }}
-            />
-            <h4 style={{ padding: "8px" }}>{location?.name}</h4>
-        </div>
-    )
-}
+        <Card shadow="sm" padding="md" radius="md" withBorder w={200}>
+            <Card.Section>
+                <AspectRatio ratio={16 / 9}>
+                    <Image
+                        src={imageUrl}
+                        alt={`Bilde av mat fra ${title}`}
+                    />
+                </AspectRatio>
+            </Card.Section>
+
+            <Stack mt="sm" gap={2}>
+                <Text fw={500} size="md">{title}</Text>
+                <Text size="xs" c="dimmed">{description}</Text>
+            </Stack>
+        </Card>
+    );
+};
