@@ -1,9 +1,8 @@
-import React from "react";
 import "./nearbyGateCard.css";
 
 interface GateCardProps {
   gateName: string;
-  availabilityLevel: number; // 0 - 100
+  availabilityLevel: number;
 }
 
 export const NearbyGateCard = ({
