@@ -1,9 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { routeTree } from './routeTree.gen'
 import {store} from "./app/store.ts";
 import {Provider} from "react-redux";
-import {createRouter, RouterProvider} from "@tanstack/react-router";
+import { RouterProvider} from "@tanstack/react-router";
 import {MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@digdir/designsystemet-css/index.css';

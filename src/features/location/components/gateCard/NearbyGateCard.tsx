@@ -1,16 +1,15 @@
 import React from "react";
 import "./nearbyGateCard.css";
-import { GateCardProps } from './GateCard.types';
 
 interface GateCardProps {
   gateName: string;
   availabilityLevel: number; // 0 - 100
 }
 
-export const GateCard: React.FC<GateCardProps> = ({
+export const NearbyGateCard = ({
   gateName,
   availabilityLevel,
-}) => {
+}: GateCardProps) => {
   const clipId = `progress-clip-${gateName.replace(/\s+/g, "-")}`;
   const fillColor = getFillColor(availabilityLevel);
   const availability = getAvailabilityText(availabilityLevel);

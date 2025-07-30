@@ -2,6 +2,7 @@ import {useParams} from "@tanstack/react-router";
 import {useGetNearbyGatesByLocationIdQuery} from "../locationApi.ts";
 import type {GetNearbyGatesRequest} from "../types.ts";
 import {useState} from "react";
+import {NearbyGateCard} from "./gateCard/NearbyGateCard.tsx";
 
 export const NearbyGatesComponent = () => {
     const { locationId } = useParams({ strict: false })
@@ -28,9 +29,7 @@ export const NearbyGatesComponent = () => {
 
             <ul>
                 {gatesList?.map(gate => (
-                    <li key={gate.id}>
-                        {gate.targetLocation.name} - ({gate.walkingTimeInMinutes} min)
-                    </li>
+                    <NearbyGateCard gateName={gate?.targetLocation.name} availabilityLevel={80} />
                 ))}
             </ul>
 

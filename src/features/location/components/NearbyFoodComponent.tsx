@@ -36,7 +36,6 @@ export const NearbyFoodComponent = () => {
             {locations.map((location) => (
                 <FoodCard
                     key={location.targetLocation.id}
-                    locationParentId={locationIdNumber}
                     nearbyId={location.targetLocation.id}
                 />
             ))}

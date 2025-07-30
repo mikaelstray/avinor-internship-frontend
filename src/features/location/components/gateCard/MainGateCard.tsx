@@ -6,10 +6,10 @@ interface GateCardProps {
   availabilityLevel: number;
 }
 
-export const MainGateCard: React.FC<GateCardProps> = ({
+export const MainGateCard = ({
   gateName,
   availabilityLevel,
-}) => {
+}: GateCardProps) => {
   const clipId = `progress-clip-${gateName.replace(/\s+/g, "-")}`;
   const fillColor = getFillColor(availabilityLevel);
   const backgroundColor = getBackgroundColor(availabilityLevel);

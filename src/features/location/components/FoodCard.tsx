@@ -1,5 +1,4 @@
-import {useAppSelector} from "../../../app/hooks.ts";
-import {selectNearbyRelationshipById, useGetLocationByIdQuery} from "../locationApi.ts";
+import { useGetLocationByIdQuery} from "../locationApi.ts";
 
 
 interface FoodCardProps {
