@@ -9,6 +9,7 @@ import '@digdir/designsystemet-css/index.css';
 import './style/avinor.css'
 import './style/fonts.css';
 import { router } from './app/router'
+import '@mantine/carousel/styles.css';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
