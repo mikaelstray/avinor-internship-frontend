@@ -4,6 +4,7 @@ import {QrCodeComponent} from "../../airport/components/QrCodeComponent.tsx";
 import {NearbyGatesComponent} from "../components/NearbyGatesComponent.tsx";
 import {NearbyFoodComponent} from "../components/NearbyFoodComponent.tsx";
 import {GateCardContainer} from "../components/gateCard/GateCardContainer.tsx";
+import { GateHeader } from "../components/gateHeader/GateHeader";
 
 export const LocationsPage = () => { //TODO optimistic update
     return (
@@ -19,6 +20,10 @@ export const LocationsPage = () => { //TODO optimistic update
 
                 <Grid.Col span={{ base: 12, lg: 8 }}>
                     <Grid gutter="xl">
+
+                <Grid.Col span={12}>
+                    <GateHeader gateName={`Gate ${location.name}`} />
+                    </Grid.Col>
                         <Grid.Col span={{ base: 12, md: 7 }}>
                             <GateCardContainer />
                         </Grid.Col>

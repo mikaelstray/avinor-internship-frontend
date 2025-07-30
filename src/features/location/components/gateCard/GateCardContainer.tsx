@@ -1,7 +1,8 @@
-import { useGetLocationByIdQuery, useGetOccupancyStatusQuery} from "../locationApi.ts";
 import {useParams} from "@tanstack/react-router";
 import { GateCard } from "./neabyGateCard";
 import {Paper, Skeleton, Stack, Text} from "@mantine/core";
+import {useGetLocationByIdQuery, useGetOccupancyStatusQuery} from "../../locationApi.ts";
+
 
 export const GateCardContainer = () => {
     const { locationId } = useParams({ strict: false });
