@@ -2,7 +2,6 @@ import { useParams } from "@tanstack/react-router";
 import { Paper, Skeleton, Text } from "@mantine/core";
 import { useGetLocationByIdQuery, useGetOccupancyStatusQuery } from "../../locationApi.ts";
 import { MainGateInfoCard } from "./MainGateInfoCard.tsx";
-import {GateHeader} from "../gateHeader/GateHeader.tsx";
 
 export const GateCardContainer = () => {
     const { locationId } = useParams({ strict: false });
@@ -27,8 +26,6 @@ export const GateCardContainer = () => {
 
     return (
         <>
-            <GateHeader gateName={location.name} />
-            {/* <MainGateCard gateName={location.name} availabilityLevel={80} /> */}
             <MainGateInfoCard occupancyPercent={occupancyPercent} />
         </>
     );
