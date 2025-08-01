@@ -3,7 +3,6 @@ import type {SeatingInfo} from "../types";
 import { IoPerson } from "react-icons/io5";
 import { BsFillPeopleFill } from "react-icons/bs";
 import {FaUsers} from "react-icons/fa";
-import {PiUsersFourFill} from "react-icons/pi";
 
 export const useSeatingInfo = (percentage: number): SeatingInfo => {
     return useMemo(() => {
