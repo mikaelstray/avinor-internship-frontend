@@ -10,6 +10,7 @@ export interface LocationResponse {
     name: string
     capacity: number
     type: string //TODO: typedto/enum
+    imageUrl: string
     terminal: TerminalLiteResponse
     nearbyLocations: LocationLiteResponse[]
 }
@@ -18,7 +19,8 @@ export interface LocationLiteResponse {
     id: number
     name: string
     capacity: number
-    type: string
+    type: string,
+    imageUrl: string
 }
 
 export interface LocationOccupancyStatus {
@@ -59,3 +61,12 @@ export interface ApiPageResponse<T> {
     size: number;
 }
 
+export interface SeatingInfo {
+    title: string
+    description: string
+    statusLabel: string
+    color: string
+    icon: React.ReactNode
+    fillColor: string
+    backgroundColor: string
+}
