@@ -1,5 +1,4 @@
-import { Paper, Text, Group, Progress, Stack } from '@mantine/core';
-import { FaUsers } from 'react-icons/fa';
+import {Paper, Text, Group, Progress, Stack, rem} from '@mantine/core';
 import {useSeatingInfo} from "../../hooks/useOccupancyStatus.tsx";
 
 interface OccupancyStatusCardProps {
@@ -8,27 +7,35 @@ interface OccupancyStatusCardProps {
 
 export const MainGateInfoCard = ({ occupancyPercent }: OccupancyStatusCardProps) => {
 
-    const { title, description, statusLabel, icon } = useSeatingInfo(occupancyPercent)
+    const { title, description, icon, fillColor, backgroundColor } = useSeatingInfo(occupancyPercent)
     return (
-        // 1. Hovedcontainer for kortet
-        <Paper withBorder p="xl" radius="md">
-            {/* 2. Stack for å stable alt innholdet vertikalt */}
-            <Stack gap="md">
-                {/* 3. Toppseksjon med tittel, undertittel og ikon */}
+        <Paper withBorder p="lg" radius="md" style={{ height: rem(170)}}>
+            <Stack gap="sm">
                 <div>
                     <Group justify="space-between">
                         <Text size="xl" fw={450}>{title}</Text>
                         {icon}
                     </Group>
-                    <Text size="xs" c="dimmed">{statusLabel}</Text>
+                    <Text size="xs" c="dimmed">Estimert ledig sitteplass</Text>
                 </div>
 
-                {/* 4. Progress-bar */}
-                <Progress value={occupancyPercent} color="yellow" size="lg" radius="xl" transitionDuration={200} />
-
-                {/* 5. Beskrivelse nederst */}
+                <Progress
+                    value={occupancyPercent}
+                    size="xl"
+                    radius={8}
+                    color={fillColor}
+                    style={{ height: rem(28) }}
+                    styles={{
+                        root: {
+                            backgroundColor: backgroundColor,
+                        },
+                        bar: {
+                            transition: "none",
+                        },
+                    }}
+                />
                 <Text size="sm">{description}</Text>
             </Stack>
         </Paper>
     );
-};
+}
