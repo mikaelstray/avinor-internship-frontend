@@ -4,6 +4,7 @@
   align-items: flex-start;
   align-content: flex-start;
   gap: 8px var(--ds-size-2);
+  height: 32px;
   flex-wrap: wrap;
   align-self: stretch;
   background: var(--ds-color-background-tinted);
@@ -15,7 +16,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 130%;
+  line-height: 100%;
   letter-spacing: -0.18px;
   margin: 0;
 }
