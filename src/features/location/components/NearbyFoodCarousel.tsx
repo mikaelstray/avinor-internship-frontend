@@ -26,7 +26,7 @@ export const NearbyFoodCarousel = () => {
 
     return (
         <Stack gap="md">
-            <Title order={4}>Mat i nærheten</Title>
+            <Title fw={500} ta="center" py="xs" size="lg">Gater i nærheten</Title>
             <ScrollArea h="100%">
                 <Group wrap="nowrap">
                     {(nearbyServingRelations ?? []).map((relation) => (

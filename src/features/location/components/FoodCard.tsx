@@ -22,7 +22,7 @@ export const FoodCard = ({ nearbyId }: FoodCardProps) => {
 
     const location = servingLocation?.targetLocation
     return (
-        <Card shadow="sm" padding="md" radius="md" withBorder w={200}>
+        <Card shadow="sm"  padding="md" radius="sm" withBorder w={200}>
             <Card.Section>
                 <AspectRatio ratio={16 / 9}>
                     <Image
