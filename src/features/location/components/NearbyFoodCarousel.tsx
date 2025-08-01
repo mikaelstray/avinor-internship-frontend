@@ -24,23 +24,23 @@ export const NearbyFoodCarousel = () => {
         );
     }
 
-    return (
-        <Stack gap="md">
-            <Title order={2}>Mat i nærheten</Title>
-            <ScrollArea h="100%">
-                <Group wrap="nowrap">
-                    {(nearbyLocations ?? []).map((location) => (
-                        <div key={location.id} style={{ minWidth: 200 }}>
-                            <FoodCard
-                                title={location.targetLocation.name}
-                                description="Åpent når det er flyvninger"
-                                imageUrl={`https://picsum.photos/seed/${location.targetLocation.id}/400/250`}
-                            />
-                        </div>
-                    ))}
-                </Group>
-            </ScrollArea>
-        </Stack>
-    );
+     return (
+            <Stack gap="md">
+                <Title order={2} style={{ textAlign: "center" }}>Mat og servering i nærheten</Title>
+                <ScrollArea h="100%">
+                    <Group wrap="nowrap">
+                        {(nearbyLocations ?? []).map((location) => (
+                            <div key={location.id} style={{ minWidth: 200 }}>
+                                <FoodCard
+                                    title={location.targetLocation.name}
+                                    description="Åpent når det er flyvninger"
+                                    imageUrl={`https://picsum.photos/seed/${location.targetLocation.id}/400/250`}
+                                />
+                            </div>
+                        ))}
+                    </Group>
+                </ScrollArea>
+            </Stack>
+        );
 
 }

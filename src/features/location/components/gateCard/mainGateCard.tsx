@@ -102,14 +102,14 @@ export const MainGateCard = ({
 
 function getFillColor(percent: number): string {
   if (percent > 90) return "#F45F63";
-  if (percent > 70) return "#F45F63";
-  if (percent > 40) return "#ECC56B";
+  if (percent > 86) return "#F45F63";
+  if (percent > 57) return "#ECC56B";
   return "#8FC997";
 }
 
 function getBorderColor(percent: number): string {
-  if (percent > 70) return "#E4575A";
-  if (percent > 40) return "#E7B43F";
+  if (percent > 86) return "#E4575A";
+  if (percent > 57) return "#E7B43F";
   return "#8FC997";
 }
 
