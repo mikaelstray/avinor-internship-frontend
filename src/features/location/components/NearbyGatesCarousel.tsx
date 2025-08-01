@@ -2,11 +2,12 @@ import {useParams} from "@tanstack/react-router";
 import {useGetNearbyGatesByLocationIdQuery} from "../locationApi.ts";
 import type {GetNearbyGatesRequest} from "../types.ts";
 import {useState} from "react";
-import {GateInfoCard} from "./gateCard/GateInfoCard.tsx";
-import {ActionIcon, Group, SimpleGrid, Skeleton, Stack, Text} from "@mantine/core";
+import {NearbyGateInfoCard} from "./gateCard/NearbyGateInfoCard.tsx";
+import {ActionIcon, Group, SimpleGrid, Skeleton, Stack, Text, Title} from "@mantine/core";
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import {Carousel} from "@mantine/carousel";
 import {GateCarouselCard} from "./gateCard/GateCarouselCard.tsx";
+import {NearbyGateCard} from "./gateCard/NearbyGateCard.tsx";
 
 export const NearbyGatesCarousel = () => {
     const { locationId } = useParams({ strict: false })
@@ -32,18 +33,22 @@ export const NearbyGatesCarousel = () => {
 
     const slides = (gatesPage?.content ?? []).map((gate) => (
         <Carousel.Slide key={gate.id}>
-            <GateInfoCard
-                gateName={gate.targetLocation.name}
-                statusText="Mye ledig" // Bør hentes fra ekte data
-                occupancyPercent={25}
-                walkTime={gate.walkingTimeInMinutes}
-            />
+            <NearbyGateInfoCard name={gate.targetLocation.name} gateId={gate.targetLocation.id} capacity={gate.targetLocation.capacity} />
         </Carousel.Slide>
     ));
 
     return (
-        <Carousel slideSize="33.333333%" slideGap="md" align="start" loop withControls={false} withIndicators>
-            {slides}
-        </Carousel>
+        <>
+            <Title fw={400} size="md">Gater i nærheten</Title>
+            <Carousel
+                slideSize="33.333333%"
+                slideGap="xs"
+                withControls={true}
+                withIndicators
+                emblaOptions={{ loop: false, align: 'start', slidesToScroll: 3 }}
+            >
+                {slides}
+            </Carousel>
+        </>
     );
 }
