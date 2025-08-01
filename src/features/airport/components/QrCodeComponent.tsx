@@ -1,4 +1,4 @@
-import {Heading, Paragraph} from "@digdir/designsystemet-react";
+import { Paragraph} from "@digdir/designsystemet-react";
 import {QrCode} from "../../../components/QrCode.tsx";
 
 interface QrCodeComponentProps {
@@ -19,7 +19,7 @@ export const QrCodeComponent = ({ url }: QrCodeComponentProps) => {
 
             <QrCode url={url} />
             <Paragraph
-                style={{ color: 'var(--ds-color-text-default)' }}
+                style={{ color: 'var(--ds-color-text-default)', textAlign: "center" }}
             >
                 Scan med kamera for å fortsette på mobil
             </Paragraph>
