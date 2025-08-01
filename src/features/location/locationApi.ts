@@ -1,4 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit";
 import type {
     ApiPageResponse,
     GetNearbyGatesRequest, GetNearbyServingsRequest,
@@ -79,15 +78,3 @@ export const {
     useGetNearbyGatesByLocationIdQuery,
     useGetNearbyServingsByLocationIdQuery
 } = locationApi;
-
-
-export const selectAllNearbyGatesForLocation = (state, id) =>
-    locationApi.endpoints.getNearbyGatesByLocationId.select(id)(state)?.data?.content ?? [];
-
-export const selectNearbyRelationshipById = createSelector(
-    [
-        selectAllNearbyGatesForLocation,
-        (_state, _locationId, relationshipId) => relationshipId
-    ],
-    (allGates, relationshipId) => allGates.find(relationship => relationship.id === relationshipId)
-);

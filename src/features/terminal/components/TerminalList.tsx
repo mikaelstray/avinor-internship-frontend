@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-
-// Korrekt import fra @digdir/designsystemet-react
 import { Details, Button, Paragraph } from '@digdir/designsystemet-react';
+import { Title } from '@mantine/core';
 
 import { useGetTerminalsByAirportIataQuery } from '../../airport/airportApi.ts';
-import {Title} from "@mantine/core";
 
 interface TerminalListProps {
     airportIata: string;
 }
 
 export const TerminalList = ({ airportIata }: TerminalListProps) => {
+    const [openTerminalId, setOpenTerminalId] = useState<number | null>(null);
     const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
     const { data: terminals, isLoading, isError } = useGetTerminalsByAirportIataQuery(airportIata);
     const navigate = useNavigate();
@@ -19,16 +18,25 @@ export const TerminalList = ({ airportIata }: TerminalListProps) => {
     if (isLoading) return <Paragraph>Laster...</Paragraph>;
     if (isError) return <Paragraph color="danger">Kunne ikke laste terminaler.</Paragraph>;
 
+    const handleToggle = (terminalId: number) => {
+        setOpenTerminalId(currentOpenId => (currentOpenId === terminalId ? null : terminalId));
+    };
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Title ta="center" mb={20} order={3} c="var(--ds-color-text-default)">
                 Velg din gate
             </Title>
             {terminals?.map((terminal) => (
-                <Details key={terminal.id} color="primary">
-                    <Details.Summary>Gate {terminal.name}</Details.Summary>
-                    <Details.Content
-                    >
+                <Details
+                    key={terminal.id}
+                    color="primary"
+                    open={openTerminalId === terminal.id}
+                >
+                    <Details.Summary onClick={() => handleToggle(terminal.id)}>
+                        Gate {terminal.name}
+                    </Details.Summary>
+                    <Details.Content>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--ds-size-3)' }}>
                             {terminal.locations.map(location => (
                                 <Button

@@ -7,7 +7,7 @@ export const BackButton: React.FC = () => {
     console.log("window.history.length", window.history.length);
 
     if (window.history.length > 1) {
-      router.history.go(-1);
+      router.history.back();
     } else {
       router.navigate({ to: '/' }); // fallback til forsiden
     }

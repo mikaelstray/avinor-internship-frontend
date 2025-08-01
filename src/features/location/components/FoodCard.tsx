@@ -1,27 +1,40 @@
 import { Card, Image, Text, Stack, AspectRatio } from '@mantine/core';
+import {useGetNearbyServingsByLocationIdQuery} from "../locationApi.ts";
+import type {GetNearbyServingsRequest} from "../types.ts";
+import {useParams} from "@tanstack/react-router";
 
-// Props for å gjøre komponenten dynamisk
 interface FoodCardProps {
-    title: string;
-    description: string;
-    imageUrl: string;
+    nearbyId: number
 }
 
-export const FoodCard = ({ title, description, imageUrl }: FoodCardProps) => {
+export const FoodCard = ({ nearbyId }: FoodCardProps) => {
+    const { locationId} = useParams({ strict: false })
+    const req: GetNearbyServingsRequest = {
+        locationId: locationId,
+        sortBy: "walkingTime"
+    }
+    //send id as props and select serving location from cache to avoid rerendering entire list, could send fields as props for simplicity
+    const { servingLocation } = useGetNearbyServingsByLocationIdQuery(req, {
+        selectFromResult: ({ data }) => ({
+            servingLocation: data?.find((servingRelation) => servingRelation.targetLocation.id === nearbyId),
+        }),
+    });
+
+    const location = servingLocation?.targetLocation
     return (
-        <Card shadow="sm" padding="md" radius="md" withBorder w={200}>
+        <Card shadow="sm"  padding="md" radius="sm" withBorder w={200}>
             <Card.Section>
                 <AspectRatio ratio={16 / 9}>
                     <Image
-                        src={imageUrl}
-                        alt={`Bilde av mat fra ${title}`}
+                        src={location?.imageUrl}
+                        alt={`Bilde av mat fra ${location?.name}`}
                     />
                 </AspectRatio>
             </Card.Section>
 
             <Stack mt="sm" gap={2}>
-                <Text fw={500} size="md">{title}</Text>
-                <Text size="xs" c="dimmed">{description}</Text>
+                <Text fw={500} size="md">{location?.name}</Text>
+                <Text size="xs" c="dimmed">Åpent når det er flygninger</Text>
             </Stack>
         </Card>
     );

@@ -1,12 +1,10 @@
 import {useParams} from "@tanstack/react-router";
 import {useGetNearbyGatesByLocationIdQuery} from "../locationApi.ts";
 import type {GetNearbyGatesRequest} from "../types.ts";
-import {useState} from "react";
-import {GateInfoCard} from "./gateCard/GateInfoCard.tsx";
-import {ActionIcon, Group, SimpleGrid, Skeleton, Stack, Text} from "@mantine/core";
-import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {NearbyGateInfoCard} from "./gateCard/NearbyGateInfoCard.tsx";
+import { Skeleton, Title} from "@mantine/core";
 import {Carousel} from "@mantine/carousel";
-import {GateCarouselCard} from "./gateCard/GateCarouselCard.tsx";
+
 
 export const NearbyGatesCarousel = () => {
     const { locationId } = useParams({ strict: false })
@@ -14,11 +12,11 @@ export const NearbyGatesCarousel = () => {
     const getGatesReq: GetNearbyGatesRequest = {
         locationId: locationIdNumber,
         page: 0,
-        size: 9,
+        size: 6,
         sortBy: "walkingTime"
     }
 
-    const { data: gatesPage, isLoading, error, isFetching } = useGetNearbyGatesByLocationIdQuery(getGatesReq) //TODO keepunused for lenge
+    const { data: gatesPage, isLoading } = useGetNearbyGatesByLocationIdQuery(getGatesReq) //TODO keepunused for lenge
 
     if (isLoading) {
         return (
@@ -30,20 +28,32 @@ export const NearbyGatesCarousel = () => {
         );
     }
 
-    const slides = (gatesPage?.content ?? []).map((gate) => (
-        <Carousel.Slide key={gate.id}>
-            <GateInfoCard
-                gateName={gate.targetLocation.name}
-                statusText="Mye ledig" // Bør hentes fra ekte data
-                occupancyPercent={25}
-                walkTime={gate.walkingTimeInMinutes}
-            />
+    const slides = (gatesPage?.content ?? []).map((relation) => (
+        <Carousel.Slide key={relation.id}>
+            <NearbyGateInfoCard name={relation.targetLocation.name} gateId={relation.targetLocation.id} capacity={relation.targetLocation.capacity} />
         </Carousel.Slide>
     ));
 
     return (
-        <Carousel slideSize="33.333333%" slideGap="md" align="start" loop withControls={false} withIndicators>
-            {slides}
-        </Carousel>
+        <>
+            <Title fw={500} ta="center" py="md" size="lg">Gater i nærheten</Title>
+            <Carousel
+                slideSize="33.3%"
+                slideGap={1}
+                withControls={false}
+                withIndicators
+                emblaOptions={{ loop: false, align: 'start', slidesToScroll: 3 }}
+                styles={{
+                    indicators: {
+                        bottom: 'calc(-1 * var(--mantine-spacing-sm))',
+                    },
+                    indicator: {
+                        backgroundColor: 'grey',
+                    },
+                }}
+            >
+                {slides}
+            </Carousel>
+        </>
     );
 }
