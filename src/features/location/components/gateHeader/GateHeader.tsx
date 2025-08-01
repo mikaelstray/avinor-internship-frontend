@@ -5,7 +5,7 @@ interface GateHeaderProps {
   gateName: string;
 }
 
-export const GateHeader: React.FC<GateHeaderProps> = ({ gateName }) => {
+export const GateHeader = ({ gateName }: GateHeaderProps) => {
   return (
     <div className="gate-header-wrapper">
       <h2 className="gate-header-title">{gateName}</h2>
