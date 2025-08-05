@@ -8,7 +8,7 @@ export const useSeatingInfo = (percentage: number): SeatingInfo => {
     return useMemo(() => {
         const p = Math.max(0, percentage);
 
-        if (p <= 40) {
+        if (p <= 35) {
             return {
                 title: 'Mye ledig sitteplass',
                 statusLabel: 'Mye ledig',
@@ -21,7 +21,7 @@ export const useSeatingInfo = (percentage: number): SeatingInfo => {
             };
         }
 
-        if (p < 86) {
+        if (p < 80) {
             return {
                 title: 'Noe ledig sitteplass',
                 statusLabel: 'Noe ledig',
