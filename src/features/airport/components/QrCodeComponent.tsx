@@ -21,7 +21,7 @@ export const QrCodeComponent = ({ url }: QrCodeComponentProps) => {
             <Paragraph
                 style={{ color: 'var(--ds-color-text-default)', textAlign: "center" }}
             >
-                Scan med kamera for å fortsette på mobil
+                Skann med kamera for å fortsette på mobil!
             </Paragraph>
         </div>
     );

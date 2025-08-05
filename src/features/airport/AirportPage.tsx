@@ -1,9 +1,8 @@
 import {useParams} from "@tanstack/react-router";
 import {TerminalList} from "../terminal/components/TerminalList.tsx";
 import {LocationSearch} from "../location/components/LocationSearch.tsx";
-import {Box, Container, Flex, Grid, Paper, Text, Title} from "@mantine/core";
+import {, Container, Flex, Grid, Paper, Text, Title} from "@mantine/core";
 import {QrCodeComponent} from "./components/QrCodeComponent.tsx";
-import {GiCongress} from "react-icons/gi";
 import {SearchTitle} from "./components/SearchTitle.tsx";
 
 export const AirportPage = () => {
@@ -25,7 +24,7 @@ export const AirportPage = () => {
                             <LocationSearch airportIata={airportIata} />
 
                             <Flex direction="column" align="center" mt="lg" gap="sm">
-                                <QrCodeComponent url="google.com" />
+                                <QrCodeComponent url="https://www.youtube.com/watch?v=xvFZjo5PgG0" />
                             </Flex>
                         </Flex>
                     </Paper>
