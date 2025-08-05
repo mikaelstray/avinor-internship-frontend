@@ -23,11 +23,13 @@ export const locationApi = baseApi.injectEndpoints({
         }),
         getNearbyGatesByLocationId: builder.query<ApiPageResponse<LocationRelationshipResponse>, GetNearbyGatesRequest>({
             query: ({ locationId, page, size, sortBy }) =>
-                `locations/${locationId}/nearby/gates?page=${page}&size=${size}&sort=${sortBy},asc`
+                `locations/${locationId}/nearby/gates?page=${page}&size=${size}&sort=${sortBy},asc`,
+            keepUnusedDataFor: 300
         }),
         getNearbyServingsByLocationId: builder.query<LocationRelationshipResponse[], GetNearbyServingsRequest>({
             query: ({ locationId, sortBy }) =>
-                `locations/${locationId}/nearby/servings?sort=${sortBy},asc`
+                `locations/${locationId}/nearby/servings?sort=${sortBy},asc`,
+            keepUnusedDataFor: 600
         }),
         getOccupancyStatus: builder.query<LocationOccupancyStatus, number>({
             query: (locationId) => `/locations/${locationId}/occupancy`,
