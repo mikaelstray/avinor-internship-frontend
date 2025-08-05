@@ -1,28 +1,27 @@
 import { useParams } from "@tanstack/react-router";
-import { Paper, Skeleton, Text } from "@mantine/core";
+import {Paper, rem, Skeleton, Text} from "@mantine/core";
 import { useGetLocationByIdQuery, useGetOccupancyStatusQuery } from "../../locationApi.ts";
 import { MainGateInfoCard } from "./MainGateInfoCard.tsx";
 
-export const GateCardContainer = () => {
-    const { locationId } = useParams({ strict: false });
-    const locationIdNumber = Number(locationId);
+interface GateCardContainerProps {
+    locationId: number
+    capacity: number
+}
 
-    const { data: location, isLoading: isLocationLoading } = useGetLocationByIdQuery(locationIdNumber);
-    const { data: livePax, isLoading: isLiveLoading } = useGetOccupancyStatusQuery(locationIdNumber);
+export const GateCardContainer = ({ locationId, capacity }: GateCardContainerProps) => {
 
-    if (isLocationLoading || isLiveLoading) {
-        return <Skeleton height={200} radius="md" />;
-    }
+    const { data: livePax, isLoading: isLiveLoading } = useGetOccupancyStatusQuery(locationId);
 
-    if (!location) {
-        return <Paper withBorder p="md"><Text c="red">Fant ikke lokasjon.</Text></Paper>;
+    if (isLiveLoading) {
+        return <Skeleton height={170} radius="md" />;
     }
 
     if (!livePax?.available) {
-        return <Paper withBorder p="md"><Text c="dimmed">Ingen live status tilgjengelig.</Text></Paper>;
+        return <Paper withBorder p="md"><Text c="dimmed" style={{ height: rem(150), width: rem(450)}}>Ingen live status tilgjengelig.</Text></Paper>;
     }
 
-    const occupancyPercent = (100 * (livePax.pax ?? 0)) / (location.capacity || 1);
+    const occupancyPercent = (100 * (livePax.pax ?? 0)) / (capacity || 1);
+    console.log(occupancyPercent)
 
     return (
         <>
