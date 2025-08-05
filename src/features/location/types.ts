@@ -9,7 +9,7 @@ export interface LocationResponse {
     id: number
     name: string
     capacity: number
-    type: string //TODO: typedto/enum
+    type: string
     imageUrl: string
     terminal: TerminalLiteResponse
     nearbyLocations: LocationLiteResponse[]

@@ -3,7 +3,7 @@ import {useGetLiteAirportsQuery} from "../airportApi.ts";
 
 
 export const AirportSearch = () => {
-    const {data: airports} = useGetLiteAirportsQuery() //TODO: add isloading and infinitequery & limit
+    const {data: airports} = useGetLiteAirportsQuery()
 
     const navigate = useNavigate()
 

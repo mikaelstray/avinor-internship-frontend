@@ -1,4 +1,3 @@
-import React from "react";
 import "./GateHeader.css";
 
 interface GateHeaderProps {

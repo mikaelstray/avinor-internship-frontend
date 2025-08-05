@@ -22,6 +22,7 @@ export const LocationSearch = ({ airportIata }: LocationSearchProps) => {
     const groupedSelectData = useMemo(() => {
         if (!airportLocations) return [];
 
+        // group gates by terminal
         const grouped = airportLocations.reduce((acc, location) => {
             const terminal = location.name.match(/^[A-Za-z]+/)?.[0] || 'Annet';
 

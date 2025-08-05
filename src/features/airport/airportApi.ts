@@ -2,10 +2,6 @@ import {baseApi} from "../../app/api.ts";
 import type {AirportLiteResponse} from "./types.ts";
 import type { TerminalResponse} from "../terminal/types.ts";
 import type {LocationLiteResponse, } from "../location/types.ts";
-import {createEntityAdapter} from "@reduxjs/toolkit";
-
-const locationsAdapter = createEntityAdapter<LocationLiteResponse>();
-const initialState = locationsAdapter.getInitialState()
 
 export const airportApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
@@ -26,5 +22,3 @@ export const {
     useGetTerminalsByAirportIataQuery,
     useGetLiteGatesByAirportIataQuery
 } = airportApi;
-
-//TODO entity adapter

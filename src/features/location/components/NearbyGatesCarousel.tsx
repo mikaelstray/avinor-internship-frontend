@@ -3,7 +3,6 @@ import type {GetNearbyGatesRequest} from "../types.ts";
 import {NearbyGateInfoCard} from "./gateCard/NearbyGateInfoCard.tsx";
 import {Paper, rem, Skeleton, Stack, Text, Title} from "@mantine/core";
 import {Carousel} from "@mantine/carousel";
-import {theme} from "../../../theme.ts";
 
 interface NearbyGatesCarouselProps {
     locationId: number

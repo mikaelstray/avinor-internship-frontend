@@ -1,6 +1,5 @@
-import { useParams } from "@tanstack/react-router";
 import {Paper, rem, Skeleton, Text} from "@mantine/core";
-import { useGetLocationByIdQuery, useGetOccupancyStatusQuery } from "../../locationApi.ts";
+import { useGetOccupancyStatusQuery } from "../../locationApi.ts";
 import { MainGateInfoCard } from "./MainGateInfoCard.tsx";
 
 interface GateCardContainerProps {
@@ -21,7 +20,6 @@ export const GateCardContainer = ({ locationId, capacity }: GateCardContainerPro
     }
 
     const occupancyPercent = (100 * (livePax.pax ?? 0)) / (capacity || 1);
-    console.log(occupancyPercent)
 
     return (
         <>

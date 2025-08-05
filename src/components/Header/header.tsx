@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { SubHeader } from "../SubHeader/SubHeader";
 import "../Header/header.css";
 import {useNavigate} from "@tanstack/react-router";
+import {SubHeader} from "../SubHeader/subHeader.tsx";
 
 type HeaderProps = {
   showBackButton: boolean;

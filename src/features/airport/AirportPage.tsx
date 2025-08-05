@@ -1,7 +1,7 @@
 import {useParams} from "@tanstack/react-router";
 import {TerminalList} from "../terminal/components/TerminalList.tsx";
 import {LocationSearch} from "../location/components/LocationSearch.tsx";
-import {, Container, Flex, Grid, Paper, Text, Title} from "@mantine/core";
+import { Container, Flex, Grid, Paper } from "@mantine/core";
 import {QrCodeComponent} from "./components/QrCodeComponent.tsx";
 import {SearchTitle} from "./components/SearchTitle.tsx";
 

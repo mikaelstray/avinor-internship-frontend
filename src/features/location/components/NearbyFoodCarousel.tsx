@@ -2,7 +2,7 @@ import {useParams} from "@tanstack/react-router";
 import {FoodCard} from "./FoodCard.tsx";
 import {useGetNearbyServingsByLocationIdQuery} from "../locationApi.ts";
 import type {GetNearbyServingsRequest} from "../types.ts";
-import {Group, Paper, ScrollArea, SimpleGrid, Skeleton, Stack, Text, Title} from "@mantine/core";
+import {Group, Paper, ScrollArea, Skeleton, Stack, Text, Title} from "@mantine/core";
 
 export const NearbyFoodCarousel = () => {
     const { locationId } = useParams({ strict: false });

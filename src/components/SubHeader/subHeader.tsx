@@ -1,6 +1,6 @@
 import React from "react";
-import { BackButton } from "../BackButton/backButton";
 import "../SubHeader/subHeader.css";
+import {BackButton} from "../BackButton/BackButton.tsx";
 
 type Props = {
   showBackButton: boolean;
@@ -9,7 +9,7 @@ type Props = {
 export const SubHeader: React.FC<Props> = ({ showBackButton }) => {
   return (
     <div className="sub-header">
-      {showBackButton ? <BackButton /> : <div />} {/* Tom placeholder hvis ingen tilbakeknapp */}
+      {showBackButton ? <BackButton /> : <div />}
 
       <button className="language-button">
         <div className="flag-icon">
