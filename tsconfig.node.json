@@ -5,6 +5,9 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "types": [
+      "@digdir/designsystemet-react/react-types"
+    ],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
